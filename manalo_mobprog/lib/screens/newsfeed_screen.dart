@@ -10,22 +10,32 @@ class NewsFeedScreen extends StatelessWidget {
       children: const [
         // Text-only post, user photo from assets
         NewsFeedCard(
-          userName: 'Cyrus Robles',
-          postContent: 'Kamusta',
+          userName: 'Andrea Santos',
+          postContent: 'Kamusta! First week of the new term, let\'s go.',
           numOfLikes: 100,
           date: 'October 11',
-          avatarPath: 'assets/images/avatar_cyrus.png',
+          avatarPath: 'assets/images/avatar_andrea.jpg',
         ),
-        // Post with an image, avatar falls back to initials
+        // Post with an image and a user photo
         NewsFeedCard(
-          userName: 'Roben Juanatas',
-          postContent: 'Kicking off the holiday season with ICpEP-NCR!',
+          userName: 'Miguel Reyes',
+          postContent: 'Finally saw the fjords in person. Worth every hour of travel.',
           numOfLikes: 200,
           hasImage: true,
-          imagePath: 'assets/images/post_holiday.png',
-          date: 'December 2',
+          imagePath: 'assets/images/post_fjord.jpg',
+          date: 'November 2',
+          avatarPath: 'assets/images/avatar_miguel.jpg',
         ),
-        // hasImage is true but no file given -> Placeholder widget
+        NewsFeedCard(
+          userName: 'Paolo Cruz',
+          postContent: 'Study session fuel for finals week.',
+          numOfLikes: 85,
+          hasImage: true,
+          imagePath: 'assets/images/post_coffee.jpg',
+          date: 'November 15',
+          avatarPath: 'assets/images/avatar_paolo.jpg',
+        ),
+        // No avatar -> initials; hasImage is true but no file -> Placeholder
         NewsFeedCard(
           userName: 'Gwyneth Manalo',
           postContent: 'Photo coming soon!',

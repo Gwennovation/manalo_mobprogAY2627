@@ -41,7 +41,7 @@ Gwyneth S. Manalo — INF 246
 - If `hasImage` is true but no path is given, it shows Flutter's `Placeholder()` widget (Enhancement 1).
 - `errorBuilder` also falls back to the `Placeholder`, so a wrong file name shows a placeholder instead of the red error box.
 
-The images live in `assets/images/`, and that folder is listed under `flutter: assets:` in `pubspec.yaml`. Without that entry, `Image.asset` can't find the file at runtime. `newsfeed_screen.dart` now shows all three cases: a text-only post, a post with an image, and a post with `hasImage: true` but no file.
+The images live in `assets/images/`, and that folder is listed under `flutter: assets:` in `pubspec.yaml`. Without that entry, `Image.asset` can't find the file at runtime. `newsfeed_screen.dart` now has four posts that cover all three cases: a text-only post, two posts with an image, and a post with `hasImage: true` but no file. The avatars and post photos are free stock photos from Unsplash, credited in `assets/images/CREDITS.md`.
 
 **Avatar (Enhancement 2).** I made a `UserAvatar` widget (`widgets/user_avatar.dart`) that wraps `CircleAvatar`. It shows the user's photo through `foregroundImage: AssetImage(...)` when an `avatarPath` is passed. Otherwise it shows the user's initials, which works the same way as the optional post image.
 
