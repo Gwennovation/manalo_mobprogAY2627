@@ -5,7 +5,7 @@ Gwyneth S. Manalo — INF 246
 
 | Folder | Description |
 |---|---|
-| `manalo_mobprog/` | Flutter application (Empty Application template) |
+| `manalo_mobprog/` | Flutter application (Empty Application template). Lab 1A code is on the `lab_act1` branch. |
 
 ## Lab Activity 0A: Flutter Installation and Project Setup
 
@@ -29,3 +29,24 @@ Gwyneth S. Manalo — INF 246
 - Keep Flutter on the stable channel and update it regularly (`flutter upgrade`).
 - Keep the SDK in a fixed location that's on my PATH, and add the `code` command to my shell PATH.
 - Commit to Git often, and keep build output out of the repo with `.gitignore`.
+
+## Lab Activity 1A: File Structuring | Design Pattern
+
+### Discussion
+
+**How the image is added to `newsfeed_card.dart`.** I added an optional `String? imagePath` field next to the existing `bool hasImage` field in `NewsFeedCard`. In the card's `Column`, the image area uses a collection-if: `if (hasImage) _PostImage(imagePath: imagePath)`. This builds the image only when the post has one. A text-only post has no empty `SizedBox` or blank space where the image would go.
+
+**Making it dynamic.** `_PostImage` is a small private widget in the same file. It decides what to show:
+- If `imagePath` is given, it shows `Image.asset(imagePath!)` with `fit: BoxFit.cover` and `width: double.infinity`, so any image fills the card width and gets cropped to the same height. `ClipRRect` rounds the corners.
+- If `hasImage` is true but no path is given, it shows Flutter's `Placeholder()` widget (Enhancement 1).
+- `errorBuilder` also falls back to the `Placeholder`, so a wrong file name shows a placeholder instead of the red error box.
+
+The images live in `assets/images/`, and that folder is listed under `flutter: assets:` in `pubspec.yaml`. Without that entry, `Image.asset` can't find the file at runtime. `newsfeed_screen.dart` now shows all three cases: a text-only post, a post with an image, and a post with `hasImage: true` but no file.
+
+**Avatar (Enhancement 2).** I made a `UserAvatar` widget (`widgets/user_avatar.dart`) that wraps `CircleAvatar`. It shows the user's photo through `foregroundImage: AssetImage(...)` when an `avatarPath` is passed. Otherwise it shows the user's initials, which works the same way as the optional post image.
+
+**Widget-based buttons (Enhancement 3).** The three `TextButton.icon` blocks were nearly identical, so I moved them into one reusable `PostActionButton` widget (icon, label, onPressed, isActive). `LikeButton` is a `StatefulWidget` built on top of it. Tapping it toggles the liked state, switches between the outlined and filled thumbs-up icons, and adds 1 to the like count.
+
+**Fixes to the given snippet.** The imports in `main.dart` started with `/` (`'/screens/home_screen.dart'`), which doesn't resolve, so I changed them to relative paths. The screens imported `custom_font.dart` and used `CustomFont`, but the file in the folder structure is `custom_text.dart` with class `CustomText`, so I used `CustomText` everywhere. I skipped the Klavika and Frutiger font files because they are optional and licensed, so Flutter falls back to its default font.
+
+**What I learned.** Splitting the app into `screens/`, `widgets/`, and `constants.dart` makes each file small and easy to find. A change to the card only touches `newsfeed_card.dart`. Making fields nullable (`String?`) and checking them in `build()` lets one widget handle posts with or without an image or photo, instead of needing separate widgets.
