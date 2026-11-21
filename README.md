@@ -5,7 +5,8 @@ Gwyneth S. Manalo — INF 246
 
 | Folder | Description |
 |---|---|
-| `manalo_mobprog/` | Flutter application (Empty Application template) |
+| `manalo_mobprog/` | Lab 0A Flutter application (Empty Application template) |
+| `lab_act0b/manalo_mobprog/` | Lab 0B: a separate, newly created Flutter application (Empty Application template) |
 
 ## Lab Activity 0A: Flutter Installation and Project Setup
 
@@ -32,7 +33,7 @@ Gwyneth S. Manalo — INF 246
 
 ## Lab Activity 0B: Discussion
 
-**Creating and running the app.** For this activity I created a new Flutter project instead of reusing my Lab 0A project. I deleted the old `manalo_mobprog` folder inside `manalo_mobprogAY2627` and generated a new one with the Empty Application template (the same template as VS Code's "Flutter: New Project → Empty Application", or `flutter create --empty manalo_mobprog` in the terminal). The folder and app names follow the lab's naming convention. Because I used the same template and the same Flutter version (3.47.9), the new project came out identical to the Lab 0A one, so Git showed no file changes in the app folder. `lib/main.dart` is the template code: `main()` calls `runApp(const MainApp())`, and `MainApp` returns a `MaterialApp` whose `Scaffold` centers a `Text('Hello World!')` widget. Before running it, I ran `flutter pub get` to fetch dependencies and `flutter analyze`, which reported "No issues found!"
+**Creating and running the app.** For this activity I created a separate Flutter project instead of reusing my Lab 0A project. I made a new folder, `lab_act0b`, inside `manalo_mobprogAY2627` and generated a new app named `manalo_mobprog` in it with the Empty Application template (the same template as VS Code's "Flutter: New Project → Empty Application", or `flutter create --empty manalo_mobprog` in the terminal). My Lab 0A project stays untouched in `manalo_mobprog/` at the root of the repository. I opened `lab_act0b/manalo_mobprog/lib/main.dart` in VS Code. It contains the template code: `main()` calls `runApp(const MainApp())`, and `MainApp` returns a `MaterialApp` whose `Scaffold` centers a `Text('Hello World!')` widget. Before running it, I ran `flutter pub get` to fetch dependencies and `flutter analyze`, which reported "No issues found!"
 
 **Device selection.** `flutter devices` listed two targets: **macOS (desktop)** and **Chrome (web)**. No Android emulator or phone appeared, because the Android SDK is still not installed. The macOS target is listed, but `flutter doctor` still reports "Xcode installation is incomplete" and "CocoaPods not installed," so macOS and iOS builds aren't reliable yet. I chose **Chrome** as my device, both in the VS Code status bar and with `flutter run -d chrome`.
 
@@ -41,7 +42,7 @@ Gwyneth S. Manalo — INF 246
 - `flutter pub get` warned that "4 packages have newer versions incompatible with dependency constraints." This is only informational: the locked versions work, and `flutter pub outdated` shows the details.
 - When I ran the app with the `web-server` device, the page stayed blank until a debugger attached. That's expected in debug mode. Running on the Chrome device, or serving the release build (`flutter build web`), showed the app right away.
 
-**How I verified it works.** `flutter analyze` passed with no issues, `flutter build web` finished with "✓ Built build/web", and `flutter run` reported "lib/main.dart is being served." The browser then showed the "Hello World!" text centered on the screen, which matches the template's expected output.
+**How I verified it works.** `flutter analyze` passed with no issues, `flutter build web` finished with "✓ Built build/web", and `flutter run` reported "lib/main.dart is being served." A Chrome window opened at `localhost` and showed the "Hello World!" text centered on the screen, which matches the template's expected output.
 
 **What I learned.** `flutter run` compiles the Dart code for whichever device you pick, launches it, and keeps a session open for hot reload (`r`) and hot restart (`R`). One codebase can run on web, desktop, or mobile, but each target needs its own platform toolchain. `flutter doctor` and `flutter devices` tell you what's actually available before you hit an error.
 
